@@ -1,0 +1,14 @@
+[
+    {
+        "name" : "test instructor",
+        "email" : "indsad@expmle.com",
+        "password" : "password123",
+        "role": "instructor"
+    },
+    {
+        "name" : "test student",
+        "email" : "student@expmle.com",
+        "password" : "password123",
+        "role": "student"
+    }
+]
