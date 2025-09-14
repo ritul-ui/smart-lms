@@ -1,6 +1,7 @@
 import { useState } from "react";
 // import { useAuth } from "../../store/useAuth";
 import illustration from "../assets/login-image.svg";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
 //   const { login } = useAuth();
@@ -95,9 +96,10 @@ export default function LoginPage() {
             <div className="text-center mt-3">
               <p className="mb-0">
                 Don’t have an account?{" "}
-                <a href="#" className="text-decoration-none">
+                {/* <a href="/register" className="text-decoration-none">
                   Sign up
-                </a>
+                </a> */}
+                <Link to="/register">Sign Up</Link>
               </p>
             </div>
           </div>

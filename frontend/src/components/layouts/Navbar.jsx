@@ -38,10 +38,10 @@ export default function Navbar() {
               </NavLink>
             </li>
 
-            <li className="nav-item ms-lg-3">
-              <Link className="btn btn-primary btn-sm" to="/login">
+            <li className="nav-item ms-lg-3 mt-1">
+              <NavLink className="btn btn-primary btn-sm" to="/login">
                 Login
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
