@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev" : "node --watch app.js",
-    "data:import" : "node data/seeder.js",
-    "data:destroy" : "node data/seeder.js -d"
+    "start:dev": "node --watch app.js",
+    "data:import": "node data/seeder.js",
+    "data:destroy": "node data/seeder.js -d"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0",
-    "morgan": "^1.10.1"
+    "morgan": "^1.10.1",
+    "stripe": "^18.5.0"
   }
 }

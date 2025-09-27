@@ -16,8 +16,9 @@ connectDB();
 app.use(express.json());
 app.use(cors());
 app.use("/api/auth", authRoutes); // goes to authroutes
-app.use("/api/course", courseRoutes); // goes to courseroutes
+// app.use("/api/course", courseRoutes); // goes to courseroutes
 app.use("/api/category", categoryRoutes);
+app.use('/api/courses', courseRoutes); // goes to courseRoute
 
 if (process.env.NODE_ENV === "dev") {
   app.use(morgan("dev"));

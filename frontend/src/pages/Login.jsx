@@ -1,20 +1,24 @@
 import { useState } from "react";
 // import { useAuth } from "../../store/useAuth";
 import illustration from "../assets/login-image.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function LoginPage() {
+export default function Login() {
 //   const { login } = useAuth();
   const [form, setForm] = useState({ email: "", password: "" });
+  const {login} = useAuth();
+  const navigate = useNavigate();
+  
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    login({ email: form.email });
-    alert("Logged in successfully!");
+   await login(form.email, form.password);
+    // alert("Logged in successfully!");
+    navigate("/");
   };
 
   return (
