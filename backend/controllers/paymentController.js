@@ -1,4 +1,7 @@
+import Stripe from "stripe";
+
 export const createPaymentIntent = async (req, res) => {
+    const {amount } = req.body;
   try {
     const args = {
       amount: amount,
