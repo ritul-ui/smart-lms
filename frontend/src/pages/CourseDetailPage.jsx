@@ -16,7 +16,7 @@ export default function CourseDetail(){
     useEffect(() => {
         const fetchCourseById = async () => {
             try{
-                const response = await axios.get(backendURL + "/api/courses/" +"http://localhost:3002/api/courses");
+                const response = await axios.get(backendURL + "/api/courses/" + courseId);
                 console.log("response", response.data);
                 //save into state
                 setCourse(response.data);

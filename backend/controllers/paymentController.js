@@ -1,7 +1,9 @@
 import Stripe from "stripe";
 
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // which business try to make intent for
+
 export const createPaymentIntent = async (req, res) => {
-    const {amount } = req.body;
+  const { amount } = req.body;
   try {
     const args = {
       amount: amount,
@@ -12,7 +14,7 @@ export const createPaymentIntent = async (req, res) => {
     };
     //create payment intent
     // const paymentIntent = await Stripe.paymentIntent.create(args);
-    const paymentIntent = await Stripe.paymentIntents.create(args);
+    const paymentIntent = await stripe.paymentIntents.create(args);
     // get client secret from intent
     console.log(paymentIntent.client_secret);
     //return client secret to FE
