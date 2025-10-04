@@ -7,7 +7,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import courseRoutes from "./routes/courseRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
-import paymentRoutes from "./routes/paymentRoutes";
+import paymentRoutes from "./routes/paymentRoutes.js";
 // console.log("port", process.env.PORT);
 
 const app = express();

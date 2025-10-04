@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import HeroSection from "../components/home/HeroSection";
+// import FeaturedCourses from "../components/home/FeaturedCourses";
 import FeaturedCourses from "../components/home/FeaturedCourses";
 
 function Home() {
@@ -76,68 +77,7 @@ function Home() {
       </section>
 
               {/* Featured Courses Section */}
-      <section className="py-5 bg-light">
-        <div className="container">
-          <h2 className="fw-bold text-center mb-5">Featured Courses</h2>
-          <div className="row g-4">
-            {featuredCourses.map((course) => (
-              <div key={course.id} className="col-md-4">
-                <Link
-                  to={`/courses/${course.slug}`}
-                  className="text-decoration-none text-dark"
-                >
-                  <div className="card h-100 shadow-lg border-0 position-relative hover-shadow">
-                    {/* Course Category Badge */}
-                    <span
-                      className="badge bg-primary position-absolute top-0 end-0 m-3"
-                      style={{ fontSize: "0.85rem" }}
-                    >
-                      {course.category}
-                    </span>
-
-                    {/* Image */}
-                    <img
-                      src={course.image}
-                      className="card-img-top"
-                      alt={course.title}
-                      style={{ height: "200px", objectFit: "cover" }}
-                    />
-
-                    {/* Card Body */}
-                    <div className="card-body d-flex flex-column">
-                      <h5 className="fw-bold mb-2">{course.title}</h5>
-
-                      {/* Price always visible */}
-                      <p className="fw-bold text-success fs-5 mb-3">
-                        ${course.price}
-                      </p>
-
-                      {/* Bottom Info */}
-                      <div className="d-flex justify-content-between align-items-center mt-auto">
-                        {/* Rating */}
-                        <span className="text-warning fw-bold">
-                          <i className="bi bi-star-fill"></i> {course.rating}
-                        </span>
-                        {/* Instructor */}
-                        <span className="text-muted small">
-                          {course.instructor}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
-
-          {/* View All Courses Button */}
-          <div className="text-center mt-5">
-            <Link to="/courses" className="btn btn-outline-primary btn-lg">
-              View All Courses
-            </Link>
-          </div>
-        </div>
-      </section>
+      <FeaturedCourses/>
 
 
 

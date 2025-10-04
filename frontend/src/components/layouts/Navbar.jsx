@@ -1,59 +1,59 @@
 import { Link, NavLink } from "react-router-dom";
-import {useAuth} from "../../context/AuthContext";
+import {useAuth} from '../../context/AuthContext';
 
 export default function Navbar() {
   const {user, logout} = useAuth();
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
       <div className="container">
         {/* Brand */}
         <Link className="navbar-brand fw-bold text-primary" to="/">
-          <i className="bi bi-mortarboard-fill me-2"></i>
-          LMS
+          Smart LMS
         </Link>
 
-        {/* Toggle button for mobile */}
+        {/* Toggler (Mobile) */}
         <button
           className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#lmsNavbar"
-          aria-controls="lmsNavbar"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Navbar links */}
-        <div className="collapse navbar-collapse" id="lmsNavbar">
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+        {/* Links */}
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/" end>
+              <NavLink className="nav-link" to="/">
                 Home
               </NavLink>
             </li>
-
             <li className="nav-item">
               <NavLink className="nav-link" to="/courses">
                 Courses
               </NavLink>
             </li>
+            {/* conditional rendering for user login/logout */}
             {user ? (
- <li className="nav-item ms-lg-3 mt-1">
-              <NavLink className="btn btn-primary btn-sm" to="/login">
-                Login
-              </NavLink>
-            </li>
+              <li className="nav-item">
+                <span>Hi {user.name}</span>
+                <NavLink className="btn btn-primary ms-lg-3" onClick={logout} to="/">
+                  Logout
+                </NavLink>
+              </li>
             ) : (
-               <li className="nav-item ms-lg-3 mt-1">
-              <NavLink className="btn btn-primary btn-sm" onClick={logout} to="/">
-                Logout
-              </NavLink>
-            </li>
+              <li className="nav-item">
+                <NavLink className="btn btn-primary ms-lg-3" to="/login">
+                  Login
+                </NavLink>
+              </li>
             )}
-
-           
+            
           </ul>
         </div>
       </div>

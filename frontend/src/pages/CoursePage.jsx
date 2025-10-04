@@ -1,82 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 
 const categories = [
-  "All Categories",
-  "Business",
-  "Data Science",
+  "Web Dev",
+  "DSA PYTHON",
+  "AI",
   "Design",
-  "Marketing",
-  "Mobile Development",
-  "Web Development",
 ];
 
-const courses = [
-  {
-    id: 1,
-    title: "Complete Web Development",
-    description: "Learn HTML, CSS, JavaScript, React, Node.js and more...",
-    price: 99.99,
-    rating: 0,
-    category: "Web Development",
-    image:
-      "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 2,
-    title: "Python for Data Science",
-    description: "Learn Python, NumPy, Pandas, Matplotlib, Seaborn and more...",
-    price: 89.99,
-    rating: 0,
-    category: "Data Science",
-    image:
-      "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=600&auto=format&fit=crop&q=60",
-  },
-  {
-    id: 3,
-    title: "React Masterclass 2023",
-    description: "Become an expert in React.js and build scalable front-end apps.",
-    price: 79.99,
-    rating: 0,
-    category: "Web Development",
-    image:
-      "https://images.unsplash.com/photo-1670057037226-b3d65909424f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cmVhY3QlMjBqc3xlbnwwfHwwfHx8MA%3D%3D",
-  },
-  {
-    id: 4,
-    title: "Design Basics",
-    description: "Introduction to UI/UX, wireframing, and visual design.",
-    price: 59.99,
-    rating: 0,
-    category: "Design",
-    image:
-      "https://images.unsplash.com/photo-1508780709619-79562169bc64?w=600&auto=format&fit=crop&q=60",
-  },
-  {
-    id: 5,
-    title: "Mobile App Development",
-    description: "Learn React Native and Flutter to build cross-platform apps.",
-    price: 109.99,
-    rating: 0,
-    category: "Mobile Development",
-    image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&auto=format&fit=crop&q=60",
-  },
-];
-
+// Remove static courses, use API data
 export default function CoursePage() {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
   const [sortBy, setSortBy] = useState("Popularity");
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const navigate= useNavigate();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetchCourses() {
+      setLoading(true);
+      setError("");
+      try {
+        const res = await fetch("http://localhost:3002/api/courses/");
+        if (!res.ok) throw new Error("Failed to fetch courses");
+        const data = await res.json();
+        setCourses(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchCourses();
+  }, []);
 
   const filteredCourses = courses
     .filter((c) =>
-      selectedCategory === "All Categories" ? true : c.category === selectedCategory
+      selectedCategory === "All Categories" ? true : c.category?.name === selectedCategory
     )
     .filter((c) => c.title.toLowerCase().includes(search.toLowerCase()));
+
+  // Sorting
+  const sortedCourses = React.useMemo(() => {
+    const arr = [...filteredCourses];
+    if (sortBy === "Price: Low to High") {
+      arr.sort((a, b) => (a.price || 0) - (b.price || 0));
+    } else if (sortBy === "Price: High to Low") {
+      arr.sort((a, b) => (b.price || 0) - (a.price || 0));
+    }
+    return arr;
+  }, [filteredCourses, sortBy]);
 
   return (
     <div>
@@ -136,34 +113,42 @@ export default function CoursePage() {
             </div>
 
             <div className="row">
-              {filteredCourses.map((course) => (
-                <div key={course.id} className="col-md-6 col-lg-4 mb-4">
-                  <div className="card h-100 shadow-sm">
-                    <img
-                      src={course.image}
-                      className="card-img-top"
-                      alt={course.title}
-                      style={{ height: "160px", objectFit: "cover" }}
-                    />
-                    <div className="card-body">
-                      <span className="badge bg-primary">{course.category}</span>
-                      <h5 className="card-title mt-2">
-                        {course.title.length > 25
-                          ? course.title.substring(0, 25) + "..."
-                          : course.title}
-                      </h5>
-                      <p className="card-text text-muted">
-                        {course.description}
-                      </p>
-                      <p className="fw-bold">${course.price.toFixed(2)}</p>
-                      <button className="btn btn-outline-primary w-100"
-                        onClick={() => navigate(`/course/${course.id}`)}>
-                        View Details
-                      </button>
+              {loading ? (
+                <div className="text-center py-5">Loading courses...</div>
+              ) : error ? (
+                <div className="text-danger py-5">{error}</div>
+              ) : sortedCourses.length === 0 ? (
+                <div className="text-center py-5">No courses found.</div>
+              ) : (
+                sortedCourses.map((course) => (
+                  <div key={course._id} className="col-md-6 col-lg-4 mb-4">
+                    <div className="card h-100 shadow-sm">
+                      <img
+                        src={course.image || "https://via.placeholder.com/300x160?text=No+Image"}
+                        className="card-img-top"
+                        alt={course.title}
+                        style={{ height: "160px", objectFit: "cover" }}
+                      />
+                      <div className="card-body">
+                        <span className="badge bg-primary">{course.category?.name || "No Category"}</span>
+                        <h5 className="card-title mt-2">
+                          {course.title.length > 25
+                            ? course.title.substring(0, 25) + "..."
+                            : course.title}
+                        </h5>
+                        <p className="card-text text-muted">
+                          {course.description}
+                        </p>
+                        <p className="fw-bold">${course.price?.toFixed(2)}</p>
+                        <button className="btn btn-outline-primary w-100"
+                          onClick={() => navigate(`/courses/${course._id}`)}>
+                          View Details
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>

@@ -1,36 +1,35 @@
-import {useState, useEffect} from "react";
-import {Link} from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
- const FeaturedCourses = () => {
+const backendURL = "http://localhost:3002";
 
-  const backendURL = "http://localhost:3002";
+const FeaturedCourses = () => {
+  const [courses, setCourses] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-    const [courses, setCourses] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+  // call the get courses api
+  useEffect(() => {
+    // fetch the data using axios
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get(backendURL + "/api/courses");
+        // save into state
+        setCourses(response.data);
+      } catch (error) {
+        console.error("Error in fetching course", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchCourses();
+  }, []);
 
-    //call the get courses api
+	if (isLoading) return <p>Loading Courses...</p>
 
-    useEffect(() => {
-        const fetchCourses = async () => {
-            try{
-                const response = await axios.get(backendURL + "/api/courses");
-                console.log("response", response.data);
-                //save into state
-                setCourses(response.data);
-            }catch(error){
-                    console.error(error);
-            }
-        }
-        fetchCourses();
-    }, [courses])
-
-    console.log("courses", courses);
-    if(isLoading) return <p>Loading Courses...</p>
-
-    return (
-        <>
-         <section className="py-5">
+  return (
+    <>
+      <section className="py-5">
         <div className="container">
           <h2 className="fw-bold text-center mb-4">Featured Courses</h2>
           <p className="text-muted text-center mb-5">
@@ -42,7 +41,7 @@ import axios from "axios";
             {courses.map((course) => (
               <div className="col-md-4" key={course._id}>
                 <Link
-                  to={"/courses/"+course._id}
+                  to={`/courses/${course._id}`}
                   className="text-decoration-none text-dark"
                 >
                   <div className="card h-100 shadow-lg border-0 position-relative">
@@ -52,7 +51,7 @@ import axios from "axios";
                     </span>
 
                     <img
-                      src="https://plus.unsplash.com/premium_photo-1678565879444-f87c8bd9f241?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8d2ViJTIwZGV2ZWxvcG1lbnR8ZW58MHx8MHx8fDA%3D"
+                      src={course.image || "https://via.placeholder.com/300x160?text=No+Image"}
                       className="card-img-top"
                       alt="Course"
                     />
@@ -99,8 +98,8 @@ import axios from "axios";
           </div>
         </div>
       </section>
-        </>
-    )
-}
+    </>
+  );
+};
 
 export default FeaturedCourses;

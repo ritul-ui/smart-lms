@@ -1,5 +1,8 @@
 import Stripe from "stripe";
+import dotenv from "dotenv";
+dotenv.config();
 
+console.log("key", process.env.STRIPE_SECRET_KEY);
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY); // which business try to make intent for
 
 export const createPaymentIntent = async (req, res) => {
