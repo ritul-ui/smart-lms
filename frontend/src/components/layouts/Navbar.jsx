@@ -3,6 +3,7 @@ import {useAuth} from '../../context/AuthContext';
 
 export default function Navbar() {
   const {user, logout} = useAuth();
+  // console.log("user", user.user);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
@@ -41,7 +42,7 @@ export default function Navbar() {
             {/* conditional rendering for user login/logout */}
             {user ? (
               <li className="nav-item">
-                <span>Hi {user.name}</span>
+                <span>Hi {user.user.name}</span>
                 <NavLink className="btn btn-primary ms-lg-3" onClick={logout} to="/">
                   Logout
                 </NavLink>

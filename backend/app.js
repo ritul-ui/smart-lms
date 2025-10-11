@@ -9,6 +9,7 @@ import courseRoutes from "./routes/courseRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 // console.log("port", process.env.PORT);
+import userRoutes from "./routes/userRoutes.js";
 
 const app = express();
 //connect to db
@@ -21,6 +22,8 @@ app.use("/api/auth", authRoutes); // goes to authroutes
 app.use("/api/category", categoryRoutes);
 app.use("/api/courses", courseRoutes); // goes to courseRoute
 app.use("/api/payment", paymentRoutes); // payment
+
+app.use("/api/user", userRoutes);
 
 if (process.env.NODE_ENV === "dev") {
   app.use(morgan("dev"));

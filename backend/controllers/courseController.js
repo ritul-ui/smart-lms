@@ -69,12 +69,12 @@ export const enrollStudentInCourse = async (req, res) => {
 };
 
 //fetch enrolled user courses
-export const myCourses = async(req, res) => {
- try{
-  const courses = await Course.find({enrolledStudents : req.user._id});
-  return res.status(200).json(courses);
-
- }catch(error){
-  return  res.status(500).json({ message: "server error" });
- }
-}
+export const myCourses = async (req, res) => {
+  try {
+    console.log("hi");
+    const courses = await Course.find({ enrolledStudents: req.user._id });
+    return res.status(200).json(courses);
+  } catch (error) {
+    return res.status(500).json({ message: "server error" });
+  }
+};

@@ -11,6 +11,8 @@ import CourseDetailPage from "./pages/CourseDetailPage";
 import CoursePage from "./pages/CoursePage";
 import PrivateRoute from "./components/PrivateRoute";
 import LearningPage from "./pages/LearningPage";
+import ProfilePage from "./pages/ProfilePage"; 
+import LessonPlayerPage from "./pages/LessonPlayerPage";
 
 function App() {
   
@@ -25,6 +27,8 @@ function App() {
         <Route path="/courses/:id" element={<CourseDetailPage />} />
         <Route element={<PrivateRoute/>} >
         <Route path="/learning" element={<LearningPage />} />
+        <Route path="/learn/courses/:id" element={<LessonPlayerPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         </Route>
       </Routes>
       <Footer />

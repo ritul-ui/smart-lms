@@ -71,7 +71,7 @@ export const loginUser = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "invalid cred" });
     }
-   
+
     //create and return token
     const payload = {
       user: {
@@ -90,7 +90,7 @@ export const loginUser = async (req, res) => {
           throw new err();
         }
         //return token
-        return res.status(200).json({ token });
+        return res.status(200).json({ token, user });
       }
     );
   } catch (error) {
