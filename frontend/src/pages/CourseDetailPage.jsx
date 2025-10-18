@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const backendURL = "https://smart-lms-pcx0.onrender.com/";
+const backendURL = "https://smart-lms-pcx0.onrender.com";
 
 export default function CourseDetail() {
     const [course, setCourse] = useState({});
