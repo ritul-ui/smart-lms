@@ -4,7 +4,7 @@ import axios from "axios";
 
 const AuthContext = createContext();
 
-const backendURL = "http://localhost:3002";
+const backendURL = "https://smart-lms-pcx0.onrender.com/";
 
 export const AuthProvider = ({children}) => {
         const [user, setUser] = useState(null);

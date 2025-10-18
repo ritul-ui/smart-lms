@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const backendURL = "http://localhost:3002";
+const backendURL = "https://smart-lms-pcx0.onrender.com/";
 
 const FeaturedCourses = () => {
   const [courses, setCourses] = useState([]);

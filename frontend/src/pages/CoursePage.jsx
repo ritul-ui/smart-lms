@@ -25,7 +25,7 @@ export default function CoursePage() {
       setLoading(true);
       setError("");
       try {
-        const res = await fetch("http://localhost:3002/api/courses/");
+        const res = await fetch("https://smart-lms-pcx0.onrender.com/api/courses/");
         if (!res.ok) throw new Error("Failed to fetch courses");
         const data = await res.json();
         setCourses(data);

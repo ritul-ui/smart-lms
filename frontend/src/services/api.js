@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL:
     process.env.NODE_ENV == "prod"
       ? "smart-lms-lysdr.onrender.com"
-      : "http://localhost:3002",
+      : "https://smart-lms-pcx0.onrender.com/",
 });
 
 export default api;
