@@ -1,6 +1,28 @@
 # Smart LMS (Fullstack)
 
 Small Learning Management System with Express + MongoDB backend and React + Vite frontend.
+- An LMS is a software application for the administration, documentation, tracking, reporting, automation, 
+and delivery of educational courses or training programs.
+## Core Functionalities of Our LMS Project:
+● User Authentication: Secure sign-up and login for students and instructors (using JWT). 
+● Course Browsing & Filtering: A public-facing page where users can discover, search, and filter 
+courses by category, price, etc. 
+● Course Details: A dedicated page for each course showing its curriculum, instructor, price, and 
+student count. 
+● Payment & Enrollment: Secure payment processing (using Stripe) to allow students to purchase 
+and enroll in courses. 
+● Student Dashboard: A private "My Learning" area for enrolled students to access their courses, 
+track progress, and view content. 
+● Course Player: An interface for consuming course content (videos, text, quizzes). 
+● Profile Management: A settings page for users to update their personal information. 
+
+
+<img width="1918" height="967" alt="image" src="https://github.com/user-attachments/assets/bac81f63-637b-4934-afe4-74f57783b14b" />
+
+<img width="1917" height="957" alt="image" src="https://github.com/user-attachments/assets/4478f4e8-3239-4265-9189-7964a734fb83" />
+
+<img width="1916" height="966" alt="image" src="https://github.com/user-attachments/assets/a2e36e89-09f8-48e0-9c78-5fa8e03db866" />
+
 
 ## Repo layout
 - [backend/app.js](backend/app.js) — Express server entry  
